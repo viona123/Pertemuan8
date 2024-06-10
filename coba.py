@@ -1,4 +1,3 @@
-# jenis hewan
 jenis_hewan = """
 |==============================================|
 |                Pet Care Apps                 |
@@ -67,59 +66,66 @@ def print_nota():
     total_harga = total_treatment_ajg + total_treatment_cat
     print(f"Total Biaya  : Rp {total_harga}")
     print("-------------------------------------------------")
-    
+
 # menampilkan perulangan pilihan jenis hewan
 while True:
     print(jenis_hewan)
-    hewan = int(input("Masukkan jenis hewan 1 atau 2 ( 0 untuk selesai): "))
-    
-    if hewan == 0:
+    try:
+        hewan = int(input("Masukkan jenis hewan 1 atau 2 (0 untuk selesai): "))
+        
+        if hewan == 0:
             # diinput setelah costumer selesai input jenis hewan, banyak hewan, dan treatment yang dipilih.
             print("===== Masukkan Data Reservasi =====")
             nama_pemilik = input("Masukkan nama pemilik hewan: ")
-            no_pemilik =  input("Masukkan no telepon: ")
+            no_pemilik = input("Masukkan no telepon: ")
             alamat_pemilik = input("Masukkan alamat pemilik: ")
             kondisi_hewan = input("Masukkan kondisi hewan: ")
             print_nota()
             break
         
-    elif hewan ==1:
+        elif hewan == 1:
             grooming_anjing()
-            pilihan_treatment = int(input("Masukkan pilihan treatment [1-6]: "))
- 
-            if 1 <= pilihan_treatment <= 6:
-                # menggunakan array untuk daftar harga dan menunya, abis itu kalau dipilih maka arraynya akan -1
-                harga = [40000, 50000, 60000, 70000, 80000, 100000][pilihan_treatment - 1]
-                treatment = ["Grooming kering", "Grooming basic", "Grooming shampoo Anti kutu", 
-                                "Grooming shampoo Anti jamur", "Grooming Shampoo Anti kutu & jamur", 
-                                "Grooming shampoo Whitening"][pilihan_treatment - 1]
+            try:
+                pilihan_treatment = int(input("Masukkan pilihan treatment [1-6]: "))
                 
-                total_treatment_ajg += harga
-                nama_hewan = input("Masukan nama anjing: ")
-                anjing.append((nama_hewan, treatment, harga))
-            else:
-                print("Pilihan tidak valid")
-
-    elif hewan == 2:
-            grooming_cat ()
-            pilihan_treatment = int(input("Masukkan pilihan treatment [1-6]: " ))
+                if 1 <= pilihan_treatment <= 6:
+                    # menggunakan array untuk daftar harga dan menunya, abis itu kalau dipilih maka arraynya akan -1
+                    harga = [40000, 50000, 60000, 70000, 80000, 100000][pilihan_treatment - 1]
+                    treatment = ["Grooming kering", "Grooming basic", "Grooming shampoo Anti kutu", 
+                                 "Grooming shampoo Anti jamur", "Grooming Shampoo Anti kutu & jamur", 
+                                 "Grooming shampoo Whitening"][pilihan_treatment - 1]
+                    
+                    total_treatment_ajg += harga
+                    nama_hewan = input("Masukan nama anjing: ")
+                    anjing.append((nama_hewan, treatment, harga))
+                else:
+                    print("Pilihan tidak valid, masukkan angka antara 1-6.")
             
-            if (1 <= pilihan_treatment <= 6):
-                harga = [20000, 25000, 30000, 30000, 60000, 80000][pilihan_treatment - 1]
-                treatment = ["Grooming kering'", "Grooming basic", "Grooming shampo Anti kutu", 
-                            "Grooming shampoo Anti jamur", "Grooming Shampoo anti kutu & jamur", 
-                            "Grooming shampoo whitehing"][pilihan_treatment - 1]
-                
-                total_treatment_cat += harga
-                nama_hewan = input("Masukan nama kucing: ")
-                kucing.append((nama_hewan, treatment, harga))
+            except ValueError:
+                print("Input tidak valid. Harap masukkan angka antara 1-6.")
 
-            else:
-                print("Pilihan tidak valid.")
+        elif hewan == 2:
+            grooming_cat()
+            try:
+                pilihan_treatment = int(input("Masukkan pilihan treatment [1-6]: "))
                 
-
-    else:
-        print("Pilihan tidak valid")
-        break
-  
+                if 1 <= pilihan_treatment <= 6:
+                    harga = [20000, 25000, 30000, 30000, 60000, 80000][pilihan_treatment - 1]
+                    treatment = ["Grooming kering", "Grooming basic", "Grooming shampoo Anti kutu", 
+                                 "Grooming shampoo Anti jamur", "Grooming Shampoo Anti kutu & jamur", 
+                                 "Grooming shampoo Whitening"][pilihan_treatment - 1]
+                    
+                    total_treatment_cat += harga
+                    nama_hewan = input("Masukan nama kucing: ")
+                    kucing.append((nama_hewan, treatment, harga))
+                else:
+                    print("Pilihan tidak valid, masukkan angka antara 1-6.")
+            
+            except ValueError:
+                print("Input tidak valid. Harap masukkan angka antara 1-6.")
+        
+        else:
+            print("Pilihan tidak valid, masukkan angka 1 atau 2.")
     
+    except ValueError:
+        print("Input tidak valid. Harap masukkan angka 1 atau 2.")
